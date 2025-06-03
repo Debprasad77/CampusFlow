@@ -1,44 +1,151 @@
-# Django Student Management System (beta)
-This is a Simple Student Management System Developed for Educational Purpose using Python (Django).
-Feel free to make changes based on your requirements.
 
-I've created this project while learnging Django and followed tutorial series from **SuperCoders**
+---
 
-## Features of this Project
+# 🎓 Django Student Management System (Beta)
 
-### A. Admin Users Can
-1. See Overall Summary Charts of Stuudents Performance, Staffs Perfomrances, Courses, Subjects, Leave, etc.
-2. Manage Staffs (Add, Update and Delete)
-3. Manage Students (Add, Update and Delete)
-4. Manage Course (Add, Update and Delete)
-5. Manage Subjects (Add, Update and Delete)
-6. Manage Sessions (Add, Update and Delete)
-7. View Student Attendance
-8. Review and Reply Student/Staff Feedback
-9. Review (Approve/Reject) Student/Staff Leave
+![Django Student Management Banner](media/banner.png)
 
-### B. Staff/Teachers Can
-1. See the Overall Summary Charts related to their students, their subjects, leave status, etc.
-2. Take/Update Students Attendance
-3. Add/Update Result
-4. Apply for Leave
-5. Send Feedback to HOD
+A **Simple Student Management System** built with **Django** 🐍 for educational purposes. This project is a beginner-friendly implementation for learning Django's core concepts.
 
-### C. Students Can
-1. See the Overall Summary Charts related to their attendance, their subjects, leave status, etc.
-2. View Attendance
-3. View Result
-4. Apply for Leave
-5. Send Feedback to HOD
+> 👨‍💻 Inspired by the tutorial series from **SuperCoders**.
 
-You Can  Use Default Credentials**
+---
 
+## 🌐 Live Demo
 
-*For Staff*
+🔗 **Check it out here:** [Live Demo](https://campusFlow.onrender.com)
+
+> *(Make sure you deploy it using Heroku, Render, or any platform and update the link above.)*
+
+---
+
+## ✨ Features
+
+### 👑 Admin Users Can:
+
+* 📊 View dashboard with summary charts for students, staff, courses, subjects, and leaves.
+* 👨‍🏫 Manage **Staffs** — Add, Update, Delete.
+* 🎓 Manage **Students** — Add, Update, Delete.
+* 📚 Manage **Courses** — Add, Update, Delete.
+* 📖 Manage **Subjects** — Add, Update, Delete.
+* 🗓 Manage **Sessions** — Add, Update, Delete.
+* 📅 View Student Attendance.
+* 💬 Review and reply to Student/Staff feedback.
+* 🗂 Approve/Reject Student and Staff Leave requests.
+
+---
+
+### 👨‍🏫 Staff/Teachers Can:
+
+* 📊 View personalized dashboard with charts.
+* ✅ Take and update student attendance.
+* 📝 Add and update student results.
+* 🗓 Apply for leave.
+* 💌 Send feedback to HOD.
+
+---
+
+### 👨‍🎓 Students Can:
+
+* 📊 View dashboard with personal academic stats.
+* 📅 View attendance records.
+* 🧾 View results.
+* 🗓 Apply for leave.
+* 💌 Send feedback to HOD.
+
+---
+
+## 🧪 Default Login Credentials
+
+> Use these test accounts for quick exploration.
+
+### 👨‍🏫 Staff
+
+```
 Email: staff@gmail.com
 Password: staff
+```
 
-*For Student*
+### 👨‍🎓 Student
+
+```
 Email: student@gmail.com
 Password: student
+```
 
+---
+
+## 🖼 Project Screenshots
+
+### Admin Dashboard
+
+![Admin Dashboard Screenshot](media/admin-dashboard.png)
+
+### Staff Dashboard
+
+![Staff Dashboard Screenshot](media/staff-dashboard.png)
+
+### Student Dashboard
+
+![Student Dashboard Screenshot](media/student-dashboard.png)
+
+---
+
+## 🛠 Tech Stack
+
+* 🎯 **Python** & **Django**
+* 🧩 **HTML**, **CSS**, **Bootstrap**
+* 🗃 **SQLite** (default), or plug in PostgreSQL/MySQL
+* 📦 AdminLTE for UI (Dashboard UI Framework)
+
+---
+
+## 🚀 Getting Started
+
+Clone the project:
+
+```bash
+git clone https://github.com/Debprasad77/CampusFlow.git
+cd CampusFlow
+```
+
+If You Faced Python Versions error.(Optional)
+
+```bash
+pip install legacy-cgi
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run migrations and start the server:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## 📄 License
+
+All rights Reserve to @Debprasad Manna 2025
+
+---
+
+## 📬 Connect With Me
+
+* 💼 [LinkedIn](https://linkedin.com/in/debprasad77)
+* 💻 [Portfolio](https://debprasadportfolio.vercel.app)
+
+---
