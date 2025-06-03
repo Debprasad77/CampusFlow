@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 import json
+import traceback
 
 from student_management_app.models import CustomUser, Staffs, Courses, Subjects, Students, SessionYearModel, FeedBackStudent, FeedBackStaffs, LeaveReportStudent, LeaveReportStaff, Attendance, AttendanceReport
 from .forms import AddStudentForm, EditStudentForm
@@ -109,7 +110,7 @@ def add_staff_save(request):
             user.staffs.address = address
             user.save()
             messages.success(request, "Staff Added Successfully!")
-            return redirect('add_staff')
+            return redirect('manage_staff')
         except:
             messages.error(request, "Failed to Add Staff!")
             return redirect('add_staff')
@@ -195,7 +196,7 @@ def add_course_save(request):
             course_model = Courses(course_name=course)
             course_model.save()
             messages.success(request, "Course Added Successfully!")
-            return redirect('add_course')
+            return redirect('manage_course')
         except:
             messages.error(request, "Failed to Add Course!")
             return redirect('add_course')
@@ -330,6 +331,7 @@ def add_student(request):
 
 
 
+
 def add_student_save(request):
     if request.method != "POST":
         messages.error(request, "Invalid Method")
@@ -348,9 +350,7 @@ def add_student_save(request):
             course_id = form.cleaned_data['course_id']
             gender = form.cleaned_data['gender']
 
-            # Getting Profile Pic first
-            # First Check whether the file is selected or not
-            # Upload only if file is selected
+            # Handling profile picture
             if len(request.FILES) != 0:
                 profile_pic = request.FILES['profile_pic']
                 fs = FileSystemStorage()
@@ -359,26 +359,41 @@ def add_student_save(request):
             else:
                 profile_pic_url = None
 
-
             try:
-                user = CustomUser.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name, user_type=3)
-                user.students.address = address
+                # Create the user
+                user = CustomUser.objects.create_user(
+                    username=username,
+                    password=password,
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    user_type=3  # Student
+                )
 
+                # Get related course and session objects
                 course_obj = Courses.objects.get(id=course_id)
-                user.students.course_id = course_obj
-
                 session_year_obj = SessionYearModel.objects.get(id=session_year_id)
-                user.students.session_year_id = session_year_obj
 
-                user.students.gender = gender
-                user.students.profile_pic = profile_pic_url
-                user.save()
+                # Create student profile
+                student = Students(
+                    admin=user,
+                    address=address,
+                    gender=gender,
+                    profile_pic=profile_pic_url,
+                    course_id=course_obj,
+                    session_year_id=session_year_obj
+                )
+                student.save()
+
                 messages.success(request, "Student Added Successfully!")
-                return redirect('add_student')
-            except:
-                messages.error(request, "Failed to Add Student!")
+                return redirect('manage_student')
+            except Exception as e:
+                print("Exception:", e)
+                traceback.print_exc()
+                messages.error(request, f"Failed to Add Student! Error: {e}")
                 return redirect('add_student')
         else:
+            messages.error(request, "Form data is not valid")
             return redirect('add_student')
 
 
@@ -471,10 +486,14 @@ def edit_student_save(request):
                 del request.session['student_id']
 
                 messages.success(request, "Student Updated Successfully!")
-                return redirect('/edit_student/'+student_id)
-            except:
-                messages.success(request, "Failed to Uupdate Student.")
-                return redirect('/edit_student/'+student_id)
+                return redirect('manage_student')
+            # except:
+            #     messages.success(request, "Failed to Update Student.")
+            #     return redirect('/edit_student/'+student_id)
+            except Exception as e:
+                print("Exception:", e)
+                traceback.print_exc()
+                messages.error(request, f"Failed to Add Student! Error: {e}")
         else:
             return redirect('/edit_student/'+student_id)
 
@@ -518,7 +537,7 @@ def add_subject_save(request):
             subject = Subjects(subject_name=subject_name, course_id=course, staff_id=staff)
             subject.save()
             messages.success(request, "Subject Added Successfully!")
-            return redirect('add_subject')
+            return redirect('manage_subject')
         except:
             messages.error(request, "Failed to Add Subject!")
             return redirect('add_subject')

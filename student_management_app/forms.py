@@ -14,6 +14,8 @@ class AddStudentForm(forms.Form):
     last_name = forms.CharField(label="Last Name", max_length=50, widget=forms.TextInput(attrs={"class":"form-control"}))
     username = forms.CharField(label="Username", max_length=50, widget=forms.TextInput(attrs={"class":"form-control"}))
     address = forms.CharField(label="Address", max_length=50, widget=forms.TextInput(attrs={"class":"form-control"}))
+    session_year_id = forms.ChoiceField(label="Session Year", choices=[], widget=forms.Select(attrs={"class":"form-control"}))
+
 
     #For Displaying Courses
     try:
