@@ -33,9 +33,6 @@ I've created this project while learnging Django and followed tutorial series fr
 
 You Can  Use Default Credentials**
 
-*For HOD /SuperAdmin*
-Email: admin@gmail.com
-Password: admin
 
 *For Staff*
 Email: staff@gmail.com
