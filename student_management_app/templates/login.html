@@ -1,68 +1,433 @@
 {% extends 'base.html' %}
-{% load static %} 
+{% load static %}
 
 {% block content %}
 
-    <body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="{% url 'login' %}"><b>Student </b>Management System</a>
+<style>
+  /* Navbar Styling - Improved Version */
+  .modern-navbar {
+    background: rgba(196, 222, 249, 0.98);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 8px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+  }
+  
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px;
+  }
+  
+  .logo-image {
+    height: 36px;
+    width: 36px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  
+  .logo-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-brand:hover .logo-image {
+    transform: rotate(-5deg) scale(1.05);
+  }
+  
+  .navbar-brand:hover .logo-text {
+    color: #3498db;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .nav-link {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .nav-link:hover {
+    color: #3498db;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Footer Styling */
+  .simple-footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: -15vh;
+  }
+  
+  /* Premium Modern Styling Without Changing Original Classes */
+  .login-page {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px; /* Space for navbar and footer */
+  }
+  
+  .login-box {
+    width: 1000px;
+    max-width: 95%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+    animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    margin-top: -15vh;
+  }
+  
+  .login-logo {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .login-logo a {
+    color: #2c3e50 !important;
+    font-size: 2.2rem !important;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: none;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .login-logo a::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .login-logo a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  
+  .card {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08) !important;
+    overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s !important;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12) !important;
+  }
+  
+  .login-card-body {
+    padding: 40px !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .login-box-msg {
+    font-size: 1.2rem !important;
+    margin-bottom: 30px !important;
+    color: #2c3e50 !important;
+  }
+  
+  .login-box-msg b {
+    background: linear-gradient(90deg, #3498db, #9b59b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .input-group {
+    margin-bottom: 25px !important;
+  }
+  
+  .form-control {
+    border-radius: 8px !important;
+    padding: 15px 20px !important;
+    border: 1px solid #e0e6ed !important;
+    transition: all 0.3s !important;
+  }
+  
+  .form-control:focus {
+    border-color: #9b59b6 !important;
+    box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1) !important;
+  }
+  
+  .input-group-text {
+    background-color: #f8f9fa !important;
+    border-color: #e0e6ed !important;
+    color: #7f8c8d !important;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(90deg, #3498db, #9b59b6) !important;
+    border: none !important;
+    padding: 15px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    border-radius: 8px !important;
+    transition: all 0.4s !important;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3) !important;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4) !important;
+  }
+  
+  .login-image {
+    height: 100%;
+    min-height: 200px;
+    background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    animation: fadeInRight 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  /* Responsive adjustments - Improved */
+  @media (max-width: 992px) {
+    .login-box {
+      grid-template-columns: 1fr;
+      margin: 20px auto;
+    }
+    
+    .login-image {
+      min-height: 300px;
+      order: -1;
+    }
+    
+    .login-logo {
+      margin-top: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .modern-navbar {
+      padding: 12px 5%;
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    .nav-links {
+      gap: 20px;
+    }
+    
+    .logo-text {
+      font-size: 1.2rem;
+    }
+    
+    .nav-link {
+      font-size: 0.9rem;
+    }
+    
+    .login-logo a {
+      font-size: 1.8rem !important;
+    }
+    
+    .login-box-msg {
+      font-size: 1.1rem !important;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .modern-navbar {
+      flex-direction: column;
+      padding: 15px 5%;
+    }
+    
+    .navbar-brand {
+      margin-bottom: 10px;
+    }
+    
+    .nav-links {
+      width: 100%;
+      justify-content: space-around;
+      gap: 10px;
+    }
+    
+    .login-logo a {
+      font-size: 1.6rem !important;
+    }
+    
+    .login-card-body {
+      padding: 30px 20px !important;
+    }
+    
+    .login-box-msg {
+      font-size: 1rem !important;
+      margin-bottom: 20px !important;
+    }
+    
+    .form-control {
+      padding: 12px 15px !important;
+    }
+    
+    .btn-primary {
+      padding: 12px !important;
+    }
+  }
+</style>
+
+<!-- Modern Navbar - Improved -->
+<nav class="modern-navbar">
+  <a href="{% url 'login' %}" class="brand-link">
+        <img src="{% static 'dist/img/logo.jpg' %}" alt="Campus Flow Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+          <span class="brand-text" style="
+            font-weight: bold;
+            font-size: 1.5rem;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          ">
+            Campus Flow
+          </span>
+      </a>
+  
+  <div class="nav-links">
+    <a href="#" class="nav-link">About</a>
+    <a class="nav-link" href="#">Contact</a>
   </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to Student Management System</p>
+</nav>
 
-      <form action="{% url 'doLogin' %}" method="POST">
-      {% csrf_token %}
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+<!-- Main Content -->
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="{% url 'login' %}"><b>Student Management System</b></a>
+    </div>
+    
+    <!-- Right Column - Image (moved to top on mobile) -->
+    <div class="login-image"></div>
+    
+    <!-- Left Column - Login Form -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to <b>CampusFlow</b></p>
+
+        <form action="{% url 'doLogin' %}" method="POST">
+        {% csrf_token %}
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email" name="email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password" name="password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
             </div>
           </div>
-        </div>
 
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </div>
+
+            {% if messages %}
+            <div class="col-12 mt-3">
+              {% for message in messages %}
+                {% if message.tags == "error" %}
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
           </div>
-
-          {% comment %} <div class="col-12 text-center">
-            <a href="{% url 'password_reset' %}">Reset Password</a>
-          </div>  {% endcomment %}
-
-          {% comment %} Display Messages {% endcomment %}
-          {% if messages %}
-          <div class="col-12">
-            {% for message in messages %}
-              {% if message.tags == "error" %}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-                  {{ message }}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-          {% endif %}
-
-          <!-- /.col -->
-        </div>
-      </form>
-
-
+        </form>
+      </div>
+    </div>
   </div>
 </div>
-<!-- /.login-box -->
+
+<!-- Simple Footer -->
+<footer class="simple-footer">
+  &copy; 2025 CampusFlow - Student Management System | All Rights Reserved  &copy; Debprasad Manna
+</footer>
+
+<script>
+  // Add subtle interactive animations
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('.form-control');
+    
+    inputs.forEach(input => {
+      // Add focus/blur effects
+      input.addEventListener('focus', function() {
+        this.parentElement.querySelector('.input-group-text').style.boxShadow = '0 0 0 3px rgba(155, 89, 182, 0.2)';
+      });
+      
+      input.addEventListener('blur', function() {
+        this.parentElement.querySelector('.input-group-text').style.boxShadow = 'none';
+      });
+    });
+  });
+</script>
 
 {% endblock %}
