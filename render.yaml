@@ -10,7 +10,7 @@
 services:
   - type: web
     plan: free
-    name: CampusFlow
+    name: student_management_system
     runtime: python
     buildCommand: './build.sh'
     startCommand: 'python -m gunicorn swiftgo.asgi:application -k uvicorn.workers.UvicornWorker' 
