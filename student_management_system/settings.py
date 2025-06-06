@@ -47,6 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'student_management_app.LoginCheckMiddleWare.LoginCheckMiddleWare',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'student_management_system.urls'
