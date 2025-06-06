@@ -1,6 +1,6 @@
 
 import os
-import dj_database_url
+# import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -73,10 +73,34 @@ WSGI_APPLICATION = 'student_management_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+# DATABASE_URL = os.getenv('DATABASE_URL')
+# DATABASES = {
+#     'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+# }
+
+
+# Add these at the top of your settings.py
+
+# from urllib.parse import urlparse
+
+# Replace the DATABASES section of your settings.py with this
+# tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
 DATABASES = {
-    'default': dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('PG_NAME'),  # Remove leading slash   
+        'USER': os.getenv('PG_USER'),
+        'PASSWORD': os.getenv('PG_PASSWORD'),
+        'HOST': os.getenv('PG_HOST'),
+        'PORT': os.getenv('PG_PORT', 5432), 
+        'OPTIONS': {
+            'sslmode': 'require',  
+        }
+    }
 }
+
+
 
 
 # Password validation
@@ -121,20 +145,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Whitenoise settings for serving static files in production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
+# Cloudinary settings
+# Make sure to install the cloudinary and cloudinary_storage packages
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
-
-
-
 
 
 MEDIA_URL = '/media/'
