@@ -23,19 +23,19 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [   
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
 
     'student_management_app',
-
-    'cloudinary',
-    'cloudinary_storage',
 ]
+    
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,17 +80,11 @@ WSGI_APPLICATION = 'student_management_system.wsgi.application'
 # }
 
 
-# Add these at the top of your settings.py
-
-# from urllib.parse import urlparse
-
-# Replace the DATABASES section of your settings.py with this
-# tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
-
+# For PostgreSQL Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('PG_NAME'),  # Remove leading slash   
+        'NAME': os.getenv('PG_NAME'),  
         'USER': os.getenv('PG_USER'),
         'PASSWORD': os.getenv('PG_PASSWORD'),
         'HOST': os.getenv('PG_HOST'),
@@ -100,8 +94,6 @@ DATABASES = {
         }
     }
 }
-
-
 
 
 # Password validation
@@ -150,19 +142,25 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-
-# Cloudinary settings
-# Make sure to install the cloudinary and cloudinary_storage packages
+# Media files settings(Cloudinary)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dxubzoooo',
+#     'API_KEY': '669754818393674',
+#     'API_SECRET': 'g_SOUU2evdYaqqDFsrCMi6EVvw0',
+# }
 
+CLOUDINARY = {
+    'secure': True
+}
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 #For Custom USER

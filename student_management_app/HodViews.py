@@ -351,15 +351,20 @@ def add_student_save(request):
             gender = form.cleaned_data['gender']
 
             # Handling profile picture
-            if len(request.FILES) != 0:
-                profile_pic = request.FILES['profile_pic']
-                fs = FileSystemStorage()
-                filename = fs.save(profile_pic.name, profile_pic)
-                profile_pic_url = fs.url(filename)
-            else:
-                profile_pic_url = None
+            # if len(request.FILES) != 0:
+            #     profile_pic = request.FILES['profile_pic']
+            #     fs = FileSystemStorage()
+            #     filename = fs.save(profile_pic.name, profile_pic)
+            #     profile_pic_url = fs.url(filename)
+            # else:
+            #     profile_pic_url = None
+
+            # Get the uploaded file
+            profile_pic = request.FILES.get('profile_pic')
+
 
             try:
+
                 # Create the user
                 user = CustomUser.objects.create_user(
                     username=username,
@@ -379,7 +384,7 @@ def add_student_save(request):
                     admin=user,
                     address=address,
                     gender=gender,
-                    profile_pic=profile_pic_url,
+                    profile_pic=profile_pic,
                     course_id=course_obj,
                     session_year_id=session_year_obj
                 )
