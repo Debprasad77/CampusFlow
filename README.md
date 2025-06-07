@@ -54,6 +54,32 @@ A **Simple Student Management System** built with **Django** 🐍 for educationa
 
 ---
 
+## 🖼 Project Screenshots
+
+### Admin Dashboard
+
+![Admin Dashboard Screenshot](media/Admin_View.png)
+
+### Staff Dashboard
+
+![Student Management System Staff View](media/Staff_View.png)
+
+### Student Dashboard
+
+![Student Management System Student View](media/Student_View.png)
+
+
+---
+
+## 🛠 Tech Stack
+
+* 🎯 **Python** & **Django**
+* 🧩 **HTML**, **CSS**, **Bootstrap**
+* 🗃 **SQLite** (default), or plug in PostgreSQL/MySQL
+* 📦 AdminLTE for UI (Dashboard UI Framework)
+
+---
+
 ## 🧪 Default Login Credentials
 
 > Use these test accounts for quick exploration.
@@ -74,30 +100,6 @@ Password: student
 
 ---
 
-## 🖼 Project Screenshots
-
-### Admin Dashboard
-
-![Admin Dashboard Screenshot](media/Admin_View.png)
-
-### Staff Dashboard
-
-![Student Management System Staff View](media/Staff_View.png)
-
-### Student Dashboard
-
-![Student Management System Student View](media/Student_View.png)
-
----
-
-## 🛠 Tech Stack
-
-* 🎯 **Python** & **Django**
-* 🧩 **HTML**, **CSS**, **Bootstrap**
-* 🗃 **SQLite** (default), or plug in PostgreSQL/MySQL
-* 📦 AdminLTE for UI (Dashboard UI Framework)
-
----
 
 ## 🚀 Getting Started
 
