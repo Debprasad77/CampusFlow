@@ -3,7 +3,8 @@
 
 # 🎓 Django Student Management System (Beta)
 
-![Django Student Management Banner](media/banner.png)
+![Student Management System Admin View](media/Banner.png)
+
 
 A **Simple Student Management System** built with **Django** 🐍 for educational purposes. This project is a beginner-friendly implementation for learning Django's core concepts.
 
@@ -13,9 +14,7 @@ A **Simple Student Management System** built with **Django** 🐍 for educationa
 
 ## 🌐 Live Demo
 
-🔗 **Check it out here:** [Live Demo](https://campusFlow.onrender.com)
-
-> *(Make sure you deploy it using Heroku, Render, or any platform and update the link above.)*
+🔗 **Check it out here:** [Live Demo](https://campus-flow.onrender.com/)
 
 ---
 
@@ -79,15 +78,15 @@ Password: student
 
 ### Admin Dashboard
 
-![Admin Dashboard Screenshot](media/admin-dashboard.png)
+![Admin Dashboard Screenshot](media/Admin_View.png)
 
 ### Staff Dashboard
 
-![Staff Dashboard Screenshot](media/staff-dashboard.png)
+![Student Management System Staff View](media/Staff_View.png)
 
 ### Student Dashboard
 
-![Student Dashboard Screenshot](media/student-dashboard.png)
+![Student Management System Student View](media/Student_View.png)
 
 ---
 
